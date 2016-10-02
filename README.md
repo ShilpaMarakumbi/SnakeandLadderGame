@@ -7,4 +7,5 @@ Snake and Ladder Game using React js
 3.multiplayer game is implemented for 3 players
 
 
- play with https://guarded-headland-35864.herokuapp.com/ or download the file and run node server.js and run
+ play with https://guarded-headland-35864.herokuapp.com/ or
+ download the project and run node server.js and open in browser with localhost:8678
