@@ -1,0 +1,134 @@
+	#gameboard h2,#gameboard h3{
+		    text-align:center;
+		    margin: 5px;
+	}
+	#dicearea{
+	    float: right;
+    padding: 10px;
+    background: #c4cdd8;
+    height: 479px;
+    width: 530px;
+    border-radius: 10px;
+}
+	.perfectThrows{
+		  background: #f1e3e3;
+    padding: 5px;
+	}  
+	.roll{
+		background: #36adcc;;
+		border: none;
+		height: 37px;
+		width: 90px;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	#app{
+		height: 100vh;
+		max-width: 1100px;
+		margin: auto;
+	}
+	#currentPlayer{
+		padding: 3px;
+		font-size: 24px;
+		font-weight: 500;
+		color: green;
+		
+	}
+	#sixRollState{
+		padding:20px;
+	}
+	#container{
+		  width:500px;
+		  height:500px;
+		  position:relative;
+		  float:left;
+		  font-weight: 400;
+		  background:url("../images/t1.png") no-repeat;
+	}
+	#gamechoose{
+		text-align:center;
+		text-align: center;
+		background: #c7d8d8;
+		border-radius: 10px;
+		padding: 20px;
+		max-width: 500px;
+		margin: auto;
+	}
+	#gamechoose h3{
+		color:#36adcc;
+		font-weight:400;
+	}
+	#gamechoose button{
+		margin: 45px;
+		height:35px;
+		padding:10px;
+		background:#36adcc;
+		border:none;
+		border-radius:5px;
+		cursor:pointer;
+	}
+	#gameboard{
+		background: #c7d8d8;
+		width: 98%;
+		border-radius: 15px;
+	}
+	.container h3{
+		text-align: left;
+		padding-left: 15px;
+		font-size: 44px;
+		font-weight: 500;
+		color: #4c7819;
+	}
+	.scoreCards{
+		width: 30%;
+		margin: 10px;
+		float: left;
+		background: #c7d8d8;
+		padding: 10px;
+		border-radius: 10px;
+		transition: opacity 6.4s ease-in-out;
+	}
+	.scores{
+		width: 85%;
+		margin: 10px;
+		background: #0f97ff;
+		padding: 10px;
+		border-radius: 10px;
+	}
+	.scores p{
+		text-align: center;
+		font-size: 24px;
+		font-weight: 600;
+		color: #fff;
+		padding-bottom: 5px;
+		border-bottom: 1px solid #efefef;
+	}
+	.player_image{
+		width:40px;
+	    height:40px;
+		margin-right:10px;
+	}
+	.cell{
+		width:48px;
+		height:48px;
+		line-height:58px;
+		text-align:center;
+		float:left;
+	
+	}
+	.playersInfo{
+		margin-top:10px;
+		word-wrap: break-word;
+	}
+	
+	.player{
+		position: absolute;
+		bottom: 0px;
+		width:40px;
+		height:40px;
+		left: 10px;
+		bottom:10px;
+		z-index: 100;
+	}
+	
+  
