@@ -1,3 +1,6 @@
+	body{
+		font-family:calibri;
+	}
 	#gameboard h2,#gameboard h3{
 		    text-align:center;
 		    margin: 5px;
@@ -5,15 +8,25 @@
 	#dicearea{
 	    float: right;
     padding: 10px;
-    background: #c4cdd8;
+    background: #4f7bb1;
     height: 479px;
     width: 530px;
     border-radius: 10px;
 }
+#extrastatus{
+	float: right;
+    width: 380px;
+    height: 40px;
+}
 	.perfectThrows{
 		  background: #f1e3e3;
-    padding: 5px;
+		padding: 5px;
+	    height: 45px;
 	}  
+	.dice_class{
+		width:40px;
+		height:40px;
+	}
 	.roll{
 		background: #36adcc;;
 		border: none;
@@ -31,11 +44,11 @@
 		padding: 3px;
 		font-size: 24px;
 		font-weight: 500;
-		color: green;
+		color: #a9170c;;
 		
 	}
 	#sixRollState{
-		padding:20px;
+		padding:5px;
 	}
 	#container{
 		  width:500px;
@@ -43,32 +56,32 @@
 		  position:relative;
 		  float:left;
 		  font-weight: 400;
-		  background:url("../images/t1.png") no-repeat;
+		  background:url("../images/board.png") no-repeat;
 	}
 	#gamechoose{
 		text-align:center;
 		text-align: center;
-		background: #c7d8d8;
+		background: #41b685;
 		border-radius: 10px;
 		padding: 20px;
 		max-width: 500px;
 		margin: auto;
 	}
 	#gamechoose h3{
-		color:#36adcc;
+		color:#222;
 		font-weight:400;
 	}
 	#gamechoose button{
 		margin: 45px;
 		height:35px;
 		padding:10px;
-		background:#36adcc;
+		background:#efefef;
 		border:none;
 		border-radius:5px;
 		cursor:pointer;
 	}
 	#gameboard{
-		background: #c7d8d8;
+		background: #41b685;
 		width: 98%;
 		border-radius: 15px;
 	}
@@ -94,6 +107,17 @@
 		background: #0f97ff;
 		padding: 10px;
 		border-radius: 10px;
+		 -webkit-transition: all 250ms;
+  -moz-transition: all 250ms;
+  transition: all 250ms;
+	}
+	.scores:hover{
+		
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  transform: translateY(-2px);
+
 	}
 	.scores p{
 		text-align: center;
@@ -102,11 +126,23 @@
 		color: #fff;
 		padding-bottom: 5px;
 		border-bottom: 1px solid #efefef;
+		 -webkit-transition: all 250ms;
+  -moz-transition: all 250ms;
+  transition: all 250ms;
+	}
+	.scores p:hover{
+		
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  transform: translateY(-2px);
+
 	}
 	.player_image{
-		width:40px;
-	    height:40px;
+		width:25px;
+	    height:25px;
 		margin-right:10px;
+		margin-top:7px;
 	}
 	.cell{
 		width:48px;
@@ -116,6 +152,17 @@
 		float:left;
 	
 	}
+	.go_back,#backToGame{
+		width:30px;
+		height:30px;
+		background-repeat:no-repeat;
+		background-size:contain;
+		margin-left:50px;
+		border:none;
+		cursor:pointer;
+		background-image:url("../images/game.svg");
+		
+	}
 	.playersInfo{
 		margin-top:10px;
 		word-wrap: break-word;
@@ -124,11 +171,16 @@
 	.player{
 		position: absolute;
 		bottom: 0px;
-		width:40px;
-		height:40px;
+		width:30px;
+		height:30%0px;
 		left: 10px;
 		bottom:10px;
 		z-index: 100;
 	}
 	
-  
+  @media only screen and (min-width:320px) and (max-width:1100px){
+	  #dicearea{
+		  float:left;
+		  margin-top:20px;
+	  }
+  }
