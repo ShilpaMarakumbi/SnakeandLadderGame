@@ -57,11 +57,20 @@
 			var player_id="#"+this.name;
 			this.actaul_pos=num;
 			if(this.actaul_pos>100){ 
-				$(player_id).css({top: 0, left:450,position:'absolute'});
+				$(player_id).css({top: 0, left:0,position:'absolute'});
 			}
 			else{
 				var pos=$(player_id).offset();
 				var left_position=((num-1)%10)*50;
+				{
+					let temp_num=num;
+				if(num%10==0){
+					temp_num=temp_num-1;
+				}
+				if( Math.floor(temp_num/10)%2 ){
+					left_position=450-left_position;
+				}
+				}
 				num= (num%10==0)?num-1:num;
 				var top_position=500-(Math.floor(num/10)+1)*50;
 				$(player_id).css({top: (top_position), left:(left_position+10),position:'absolute'});
@@ -89,7 +98,7 @@
 			}
 			while(queue.length){
 			let current_pos = queue.shift();
-			if(current_pos==100) break;
+			if(current_pos==99) break;
 
 			for(i = current_pos+1; (i <= current_pos+6) && (i < 100); i++){
 				if(!visited[i]){
@@ -144,8 +153,8 @@ const GameBoard = React.createClass({
 	    },
   
 		getInitialState: function() {
-			var ladders_arr=[new Ladder(3,51),new Ladder(6,27),new Ladder(20,60),new Ladder(36,55),new Ladder(63,95),new Ladder(68,98)];
-			var snakes_arr=[new Snake(25,5),new Snake(34,1),new Snake(47,19),new Snake(65,52),new Snake(87,57),new Snake(91,61),new Snake(99,69)];
+			var ladders_arr=[new Ladder(5,26),new Ladder(13,46),new Ladder(18,39),new Ladder(37,62),new Ladder(48,72),new Ladder(60,82),new Ladder(65,95)];
+			var snakes_arr=[new Snake(23,7),new Snake(33,9),new Snake(44,14),new Snake(68,25),new Snake(77,41),new Snake(94,70),new Snake(97,66)];
 			return {
 				gameStatus: 0, 	//0:Not started 1:Started 2:End
 				gamestateText: "Game is Not Started",
@@ -158,7 +167,8 @@ const GameBoard = React.createClass({
 				totalThrows:0,
 				players:[new Player("player1"),new Player("system")],
 				ladders:ladders_arr,
-				snakes:snakes_arr
+				snakes:snakes_arr,
+				snake_ladder_status:""
 			};
 		},
 	/*purpose:to change heading in gaming mode
@@ -275,7 +285,7 @@ const GameBoard = React.createClass({
 		var currentplayer=this.state.players[current_player];
 		var actualPos=currentplayer.actaul_pos;
 	    var sixState=this.state.isSixRepeat;
-		
+		var s_l_status="";
 		if(num==6){
 		   currentplayer.sixRollerUpdate();
 		}
@@ -286,6 +296,7 @@ const GameBoard = React.createClass({
 		let ladder_top=this.getLadderClimbed(actualPos);
 
 		if(ladder_top!=-1){
+		   s_l_status="wow!! you climbed ladder";
 		   currentplayer.movePlayer(ladder_top);
 		   currentplayer.laddersClimbedUpdate();
 		}
@@ -294,6 +305,7 @@ const GameBoard = React.createClass({
 		if(currentplayer.actaul_pos>=100)
 				return 2;
 		if(snake_bottom!=-1){
+			s_l_status="oops!! you are bit by a snake";
 			currentplayer.movePlayer(snake_bottom);
 			currentplayer.snakesEncounteredUpdate();
 		}
@@ -304,6 +316,7 @@ const GameBoard = React.createClass({
 			 var curr_player=this.state.currentPlayer==1?0:1;
 		this.setState({
 			currentPlayer: curr_player,	
+			snake_ladder_status:s_l_status
 		});
 		if(curr_player==1){
 		   var self=this;
@@ -319,7 +332,7 @@ const GameBoard = React.createClass({
 	*/
 	playMultiplayerGame:function(num){
 		let players=this.state.players;
-		
+		    var s_l_status="";
 			var whose_turn = players[this.state.totalThrows%(players.length)];
 			console.log(whose_turn);
 
@@ -334,6 +347,7 @@ const GameBoard = React.createClass({
 			 let ladder_top=this.getLadderClimbed(actualPos);
 
 		  if(ladder_top!=-1){
+			   s_l_status="wow!! you climbed ladder";
 			  whose_turn.movePlayer(ladder_top);
 			  whose_turn.laddersClimbedUpdate();
 		  }
@@ -341,6 +355,7 @@ const GameBoard = React.createClass({
 		 let snake_bottom=this.getSnakeEncountered(actualPos);
 		 
 		 if(snake_bottom!=-1){
+			 s_l_status="oops!! you are bit by a snake";
 			whose_turn.movePlayer(snake_bottom);
 			whose_turn.snakesEncounteredUpdate();
 		  }
@@ -352,7 +367,9 @@ const GameBoard = React.createClass({
 				  whose_turn.sixRollerUpdate();
 			  }
 			 console.log( whose_turn.name+whose_turn.sixRollerRet());
-		
+		this.setState({
+			snake_ladder_status:s_l_status
+		});
 		return 1;
 	},
 	/*purpose:back to main page
@@ -380,10 +397,10 @@ const GameBoard = React.createClass({
 		  <button onClick={this.onGameType} id='single' className='gameType'>Single</button>
 		  <button onClick={this.onGameType} id='multiple'  className='gameType'>Multiplayer</button></div>)
 		  else if(game_status==1)
-		  return (<div id="gameboard"><h2>Snake and Ladder Game</h2><h3>{this.state.gamestateText}<button className="go_back" onClick={this.gobackToGame}>Go back to Game</button></h3>
+		  return (<div id="gameboard"><h2>Snake and Ladder Game</h2><h3>{this.state.gamestateText}<button className="go_back" onClick={this.gobackToGame}></button></h3>
 	     <Board size={100} type={this.state.gameType} />
 		   <div id='dicearea'>
-		 <Dice NumberOnDice={this.state.diceNum} AfterClick={this.RollTheDice} diceState={this.state.isSixRepeat} currentplayer={curr_player}/>
+		 <Dice NumberOnDice={this.state.diceNum} AfterClick={this.RollTheDice} diceState={this.state.isSixRepeat} currentplayer={curr_player} snakeLadStatus={this.state.snake_ladder_status}/>
 		 <div className="playersInfo">{playersInfo}</div>
 		   </div>
 		    </div>
@@ -392,12 +409,13 @@ const GameBoard = React.createClass({
 			  
 			  let scores=[];
 			  players.forEach(function(player){
-				 
+				  var src1="./images/"+player.name+".svg";
 				  scores.push(
 				   <div  key={player.name} className='scoreCards'>
 				   <div  className='scores'>
 				  
-				    <p>{player.name} Game Info</p>
+			 
+				    <p> <img className="player_image" src={src1} />{player.name} Game Info</p>
 					<ul>
 					 <li>Ladders Climbed : {player.laddersClimbedRet()}</li>
 					 <li>Snakes Encountered : {player.snakesEncounteredRet()}</li>
@@ -409,7 +427,7 @@ const GameBoard = React.createClass({
 				  );
 			  });
 			  return(
-		  <div className="container"><h3>{this.state.gamestateText}</h3><button id='backToGame' onClick={this.gobackToGame}>Go Back to Game</button>{scores}</div>
+		  <div className="container"><h3>{this.state.gamestateText}</h3><button id='backToGame' onClick={this.gobackToGame}></button>{scores}</div>
 			  )
 		  }
 	  }
